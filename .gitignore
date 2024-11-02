@@ -1,0 +1,16 @@
+/motion_imitation/__pycache__/
+/motion_imitation/envs/__pycache__/
+/motion_imitation/robots/__pycache__/
+/motion_imitation/utilities/__pycache__/
+/motion_imitation/envs/env_wrappers/__pycache__/
+/motion_imitation/envs/sensors/__pycache__/
+/motion_imitation/envs/utilities/__pycache__/
+/motion_imitation/examples/__pycache__/
+/motion_imitation.egg-info/
+/motion_imitation/robots/__pycache__/
+/motion_imitation/robots/gamepad/__pycache__/
+/mpc_controller/__pycache__
+/robot_interface.cpython-37m-x86_64-linux-gnu.so
+/third_party/unitree_legged_sdk/.cache/
+/build/
+/dist/

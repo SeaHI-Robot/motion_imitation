@@ -30,15 +30,15 @@ from mpc_controller import torque_stance_leg_controller_quadprog as torque_stanc
 
 from motion_imitation.robots import a1
 from motion_imitation.robots import robot_config
-from motion_imitation.robots.gamepad import gamepad_reader
+#  from motion_imitation.robots.gamepad import gamepad_reader
 
 flags.DEFINE_string("logdir", None, "where to log trajectories.")
-flags.DEFINE_bool("use_gamepad", False,
-                  "whether to use gamepad to provide control input.")
-flags.DEFINE_bool("use_real_robot", False,
+#  flags.DEFINE_bool("use_gamepad", False,
+#                    "whether to use gamepad to provide control input.")
+flags.DEFINE_bool("use_real_robot", True,
                   "whether to use real robot or simulation")
 flags.DEFINE_bool("show_gui", False, "whether to show GUI.")
-flags.DEFINE_float("max_time_secs", 1., "maximum time to run the robot.")
+flags.DEFINE_float("max_time_secs", 10., "maximum time to run the robot.")
 FLAGS = flags.FLAGS
 
 _NUM_SIMULATION_ITERATION_STEPS = 300
@@ -187,11 +187,11 @@ def main(argv):
   controller = _setup_controller(robot)
 
   controller.reset()
-  if FLAGS.use_gamepad:
-    gamepad = gamepad_reader.Gamepad()
-    command_function = gamepad.get_command
-  else:
-    command_function = _generate_example_linear_angular_speed
+  #  if FLAGS.use_gamepad:
+  #    gamepad = gamepad_reader.Gamepad()
+  #    command_function = gamepad.get_command
+  #  else:
+  command_function = _generate_example_linear_angular_speed
 
   if FLAGS.logdir:
     logdir = os.path.join(FLAGS.logdir,
@@ -220,14 +220,14 @@ def main(argv):
     robot.Step(hybrid_action)
     current_time = robot.GetTimeSinceReset()
 
-    if not FLAGS.use_real_robot:
-      expected_duration = current_time - start_time_robot
-      actual_duration = time.time() - start_time_wall
-      if actual_duration < expected_duration:
-        time.sleep(expected_duration - actual_duration)
-    print("actual_duration=", actual_duration)
-  if FLAGS.use_gamepad:
-    gamepad.stop()
+    #  if not FLAGS.use_real_robot:
+    #    expected_duration = current_time - start_time_robot
+    #    actual_duration = time.time() - start_time_wall
+    #    if actual_duration < expected_duration:
+    #      time.sleep(expected_duration - actual_duration)
+    #  print("actual_duration=", actual_duration)
+  #  if FLAGS.use_gamepad:
+  #    gamepad.stop()
 
   if FLAGS.logdir:
     np.savez(os.path.join(logdir, 'action.npz'),
